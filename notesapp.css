@@ -1,0 +1,68 @@
+.signup{
+    width: 300px;
+    box-shadow: 0 0 3px 0  ;
+    background-color:white;
+    padding: 30px;
+    padding-bottom: 400px;
+    padding-top: 10px;
+    margin: 8% auto 0 ;
+    text-align: center;
+    height: 180px;
+    border-radius: 10px;
+  
+}
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url("https://www.thepencompany.com/blog/wp-content/uploads/bigstock-White-Fountain-Pen-Writing-A-L-295002112-2-1.jpg");
+    background-size: cover;
+    background-position: center;
+
+}
+.login-box{
+   
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    border: 1px solid #999 ;
+    outline: none;
+}
+button{
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    font-size: 15px;
+    margin: 10px 0;
+    border: none;
+    outline: none;
+    cursor: pointer ;
+}
+.Button1{
+
+    background-color:  #5970f3fa; 
+    color:white;
+ }
+.Button2{
+    background-color: skyblue;
+    color: white;
+}
+ h1{
+     color: #4d4dff;
+    
+ }
+#icon{
+  width: 170px;
+  margin-top: -70px;
+}
+#logo{
+    margin-top: -500px;
+    margin-left: 20px;
+}
+#or{
+    margin-top: -20px;
+}
+#hr2{
+    margin-top: -9px;
+}
