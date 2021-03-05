@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Notes App </title>
+        <link rel="stylesheet" href="notesapp.css">
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-analytics.js"></script>
+       <script src="Notesapp.js"></script> 
+       
+      
+        <link rel="preconnect" href="https://fonts.gstatic.com"> 
+<link href="https://fonts.googleapis.com/css2?family=Truculenta:wght@300&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="login" id="login_div">
+           <img id="loginicon" src="proicon.png"  align="centre" > 
+            <h1>Sign In</h1>
+            <form> 
+                <input type="email" class="login-box" id="email" name="email"  placeholder="Email" required>
+                <input type="password" class="login-box" id="password" name="pass" placeholder="Password" required>
+            </form>
+  <button class="Button2" onclick="signIn()">Sign in</button> 
+  <a href="reset.html" style="text-decoration: none; color: #1877f2; font-family: inherit; font-size: 16px;
+  font-weight: 500;" >Forgotten Password?</a>
+        </div>
+<p id="animi" >KEEP WRITING</p>
+        <div id="userdiv">
+            <p > Welcome </p>
+            <button onclick="signOut()"> Sign Out </button>
+            <a href="homepage.html" > <button> Get Started.</button></a>
+        </div>
+    </body>
+</html>

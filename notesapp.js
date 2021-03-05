@@ -10,41 +10,50 @@
    appId: "1:68655298913:web:5c8fedf423c27e13252d20",
    measurementId: "G-D8QWSWYMN9"
  };
- // Initialize Firebase
- firebase.initializeApp(firebaseConfig);
- firebase.analytics();
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+// firebase.analytics();
  const auth=firebase.auth();
-
- function singUp(){
-	 var email=document.getElementById("email");
+ function signUp(){
+	var Email=document.getElementById("email");
 	var pass=document.getElementById("password");
-const promise =auth.createUserWithEmailAndPassword(email.value,pass.value);
- promise.catch(e => alert(e.message));// alert us if any error occur i.e wrong format of email or password is < 6 characters
-alert("Signed Up");
+	const promise =auth.createUserWithEmailAndPassword(Email.value,pass.value);
+	promise.catch(e => alert(e.message +" Try again."));// alert us if any error occur i.e wrong format of email or password is < 6 characters
+	alert("Signed Up"); 
  }
  
- function singIn(){
-	var email=document.getElementById("email");
+ function signIn(){
+	var Email=document.getElementById("email");
 	var pass=document.getElementById("password");
-firebase.auth.signInWithEmailAndPassword(email.value,pass.value);
+const promise = auth.signInWithEmailAndPassword(Email.value,pass.value);
 promise.catch(e => alert(e.message));
-alert("Signed In as" + email);
+console.log("Signed In as " + Email.value);
  }
-
-
-function singOut () {
+function signOut(){
 	auth.signOut();
 	alert("Thank you..")
 }
-// taking user to new page/home page after signing in.
-auth.onAuthStateChanged(function(user){
-	if(user){
-		// signed in
-		var email=user.email;
-		alert("Active user"+email);
-	} 
-	else{
-		// no user is signed in
-		alert("Not registered.")
+ function reset() {
+	var emailAddress=document.getElementById("passreset");
+	if(emailAddress !=""){
+		const resetreq = auth.sendPasswordResetEmail(emailAddress.value);
+		resetreq.then(function () {
+			alert("We sent an email with a link to get back into your account.")
+		})
+		resetreq.catch(e => alert(e.message));
 	}
-});
+ }
+auth.onAuthStateChanged(function(user) {
+if(user){
+	//  If user is logged in .
+	document.getElementById("userdiv").style.display = "block";
+	document.getElementById("login_div").style.display = "none";
+	document.getElementById("animi").style.display="none";
+	}     
+	 else{
+		document.getElementById("userdiv").style.display = "none";
+	document.getElementById("login_div").style.display = "block";
+	document.getElementById("animi").style.display="block";
+	
+	}
+} )

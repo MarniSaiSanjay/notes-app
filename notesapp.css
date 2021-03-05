@@ -1,15 +1,14 @@
-.signup{
+#signup{
     width: 300px;
     box-shadow: 0 0 3px 0  ;
     background-color:white;
     padding: 30px;
-    padding-bottom: 400px;
+    padding-bottom: 350px;
     padding-top: 10px;
     margin: 8% auto 0 ;
     text-align: center;
     height: 180px;
     border-radius: 10px;
-  
 }
 body{
     margin: 0;
@@ -18,10 +17,8 @@ body{
     background-image: url("https://www.thepencompany.com/blog/wp-content/uploads/bigstock-White-Fountain-Pen-Writing-A-L-295002112-2-1.jpg");
     background-size: cover;
     background-position: center;
-
 }
 .login-box{
-   
     border-radius: 20px;
     padding: 10px;
     margin: 10px 0;
@@ -47,7 +44,14 @@ button{
 .Button2{
     background-color: skyblue;
     color: white;
+    border-radius: 5px;
 }
+.Button3{
+
+    background-color: rgb(21, 228, 21);
+    color: white;
+    width: 70%;
+ }
  h1{
      color: #4d4dff;
     
@@ -66,3 +70,85 @@ button{
 #hr2{
     margin-top: -9px;
 }
+.login{
+    width: 300px;
+    box-shadow: 0 0 3px 0  ;
+    background-color:white;
+    padding: 30px;
+    padding-bottom: 130px;
+    padding-top: 10px;
+    margin: 8% auto 0 ;
+    text-align: center;
+    height: 184px;
+    border-radius: 10px;
+   
+   
+}
+#loginicon{
+    width: 100px;
+    margin-top: -70px;
+  }
+  #animi{
+     font-size: 1.8cm;
+      color: black;
+      animation: type 6s steps(13);
+      overflow: hidden;
+      white-space: nowrap;
+      font-family: 'Truculenta', sans-serif;
+      border-right: 3px solid black;
+      width: 13ch;
+      -webkit-animation-iteration-count:infinite;
+      animation-direction: alternate;
+     text-align: left;
+     margin-top: 230px;
+    
+  }
+  @keyframes type{
+      0% {
+          width: 0ch;
+      }
+      100% {
+          width: 10ch;
+      }
+  }
+  .Phoneverify{
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    font-size: 15px;
+    margin: 10px 0;
+    border: none;
+    outline: none;
+    cursor: pointer ;
+    background-color: rgb(63, 245, 63);
+    color: white;
+  }
+  #pp{
+    width: 110px;
+    margin-top: -70px;
+  }
+.phone{
+    width: 300px;
+    box-shadow: 0 0 3px 0  ;
+    background-color:white;
+    padding: 30px;
+    padding-bottom: 170px;
+    padding-top: 10px;
+    margin: 8% auto 0 ;
+    text-align: center;
+    height: 180px;
+    border-radius: 15px;
+   
+}
+#userdiv{
+    text-align: center;
+    height: 150px;
+    width: 200px;
+    padding: 30px;
+    margin: 8% auto 0;
+    background-color: white;
+    border-radius: 20px;
+  }
+
+
+
