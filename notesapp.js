@@ -24,7 +24,6 @@ firebase.initializeApp(firebaseConfig);
 		window.location.href="homepage.html";
 	})
 	alert("Signed Up"); 
-
  }
  
  function signIn(){
