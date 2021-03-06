@@ -32,8 +32,6 @@ firebase.initializeApp(firebaseConfig);
 const promise = auth.signInWithEmailAndPassword(Email.value,pass.value);
 promise.catch(e => alert(e.message));
 console.log("Signed In as " + Email.value);
-
-	
  }
 function signOut(){
 	auth.signOut();
