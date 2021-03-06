@@ -19,7 +19,12 @@ firebase.initializeApp(firebaseConfig);
 	var pass=document.getElementById("password");
 	const promise =auth.createUserWithEmailAndPassword(Email.value,pass.value);
 	promise.catch(e => alert(e.message +" Try again."));// alert us if any error occur i.e wrong format of email or password is < 6 characters
+	promise.then(user => {
+		console.log(user);
+		window.location.href="homepage.html";
+	})
 	alert("Signed Up"); 
+
  }
  
  function signIn(){
@@ -28,11 +33,18 @@ firebase.initializeApp(firebaseConfig);
 const promise = auth.signInWithEmailAndPassword(Email.value,pass.value);
 promise.catch(e => alert(e.message));
 console.log("Signed In as " + Email.value);
+
+	
  }
 function signOut(){
 	auth.signOut();
-	alert("Thank you..")
+	alert("Thank you..");
 }
+function SignOut(){
+	auth.SignOut();
+	alert("Thank you..");
+}
+
  function reset() {
 	var emailAddress=document.getElementById("passreset");
 	if(emailAddress !=""){
@@ -49,11 +61,14 @@ if(user){
 	document.getElementById("userdiv").style.display = "block";
 	document.getElementById("login_div").style.display = "none";
 	document.getElementById("animi").style.display="none";
+	// document.getElementById("signup").style.display="none";
+	// document.getElementById("logo").style.display="none";
 	}     
 	 else{
 		document.getElementById("userdiv").style.display = "none";
 	document.getElementById("login_div").style.display = "block";
 	document.getElementById("animi").style.display="block";
-	
+	//document.getElementById("signup").style.display="block";     
+	// document.getElementById("logo").style.display="block";
 	}
 } )
