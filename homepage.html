@@ -2,24 +2,31 @@
 <html>
     <head>
         <title> HomePage</title>
-       <link href="/Users/saisanjaymarni/Desktop/C,CPP/first/web.html/homepage.css" rel="stylesheet">
+       <link href="homepage.css" rel="stylesheet">
+       <script src="Notesapp.js"></script>
+       <script src="homepagels.js"></script>
         <link rel="preconnect" href="https://fonts.gstatic.com"> 
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet"> 
-
 <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-analytics.js"></script>
-<script src="/Users/saisanjaymarni/Desktop/C,CPP/first/web.html/Notesapp.js"></script>
-
+<!--<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script> -->
     </head>
     <body>
+        <button onclick="SignOut()" id="Button3"> SignOut</button>
         <div id="menu">
-        <a href="newnotes.html" id="new note" style="color: white; font-size: 20px;">  &#9997; New Note</a> <br />
-        <a href="more" style="color: white;"> <p id="more"> &#10010;More</p></a> <br />
-        <a href="noteslogin.html"> <button onclick="SignOut()" id="Button3"> SignOut</button> </a>
+        <input id="title" placeholder="Title"> 
+       <textarea id="notes" class="notesarea" placeholder="Add your notes here.." style="color: rgb(31, 29, 29);" ></textarea>
+            <button id="usernewnotes" onclick="SAVE1()"> &#9547; &nbsp; Add a note </button>
+            <p id="empty"> </p>
         </div>
-        <div id="inputfromuser">
-            <button id="usernewnotes"> Create new note </button>
-        </div>
+        <div id="base1" class="placeofdisplay"> <!--NOTES WILL BE DISPLAYED HERE--></div>
+        <div id="xyz">
+        <button onclick="titlechange()" id="titlechange">Change title</button>
+        <button onclick="deleteit()" id="deleteit">Delete a Note</button>
+        <button onclick="deleteall()" id="deletebtn" > &#x1f5d1; Delete All</button> </div>
+        
+      <!--  <div id="main_notes"></div> -->  
     </body>
 </html>
