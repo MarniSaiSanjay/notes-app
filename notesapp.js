@@ -12,35 +12,63 @@
  };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-// firebase.analytics();
- const auth=firebase.auth();
+// firebase.analytics(); 
+ const auth = firebase.auth();
+ 
  function signUp(){
-	var Email=document.getElementById("email");
-	var pass=document.getElementById("password");
-	const promise =auth.createUserWithEmailAndPassword(Email.value,pass.value);
+	var Email= document.getElementById("email");
+	var pass= document.getElementById("password");
+	const promise = auth.createUserWithEmailAndPassword(Email.value,pass.value);
 	promise.catch(e => alert(e.message +" Try again."));// alert us if any error occur i.e wrong format of email or password is < 6 characters
 	promise.then(user => {
 		console.log(user);
+		alert("Signed Up");
 		window.location.href="homepage.html";
-	})
-	alert("Signed Up"); 
- }
+	// document.getElementById("signup").style.display="none";
+	// document.getElementById("logo").style.display="none";
+	})}
  
  function signIn(){
 	var Email=document.getElementById("email");
 	var pass=document.getElementById("password");
 const promise = auth.signInWithEmailAndPassword(Email.value,pass.value);
 promise.catch(e => alert(e.message));
-console.log("Signed In as " + Email.value);
- }
-function signOut(){
+promise.then( user => {
+	console.log("Signed In as " + Email.value);
+	window.location.href="homepage.html"
+})
+}
+function SignOut() {	
+	auth.signOut();
+	promise.then(() => {
+		alert("Thankyou...");
+		window.location.href="noteslogin.html";
+	})
+
+}
+/*function SignOut(){
+	
+	// const promise =
 	auth.signOut();
 	alert("Thank you..");
-}
-function SignOut(){
-	auth.SignOut();
-	alert("Thank you..");
-}
+	// promise.then(() => {
+		
+		window.location.href="noteslogin.html";
+	// })
+	// .catch(e => alert(e.message));
+} */
+// bye.then( user =>{
+	// alert("Thank you..");
+  //  document.getElementById("signup").style.display="block";     
+  //  document.getElementById("logo").style.display="block";
+ // window.location.href="noteslogin.html";
+// })	
+//}
+
+// function signOut(){
+//	auth.signOut();
+//	alert("Thank you..");
+// }
 
  function reset() {
 	var emailAddress=document.getElementById("passreset");
@@ -52,12 +80,13 @@ function SignOut(){
 		resetreq.catch(e => alert(e.message));
 	}
  }
-auth.onAuthStateChanged(function(user) {
+
+/* auth.onAuthStateChanged(function(user) {
 if(user){
 	//  If user is logged in .
 	document.getElementById("userdiv").style.display = "block";
 	document.getElementById("login_div").style.display = "none";
-	document.getElementById("animi").style.display="none";
+	 document.getElementById("animi").style.display="none";
 	// document.getElementById("signup").style.display="none";
 	// document.getElementById("logo").style.display="none";
 	}     
@@ -65,7 +94,19 @@ if(user){
 		document.getElementById("userdiv").style.display = "none";
 	document.getElementById("login_div").style.display = "block";
 	document.getElementById("animi").style.display="block";
-	//document.getElementById("signup").style.display="block";     
-	// document.getElementById("logo").style.display="block";
+	// document.getElementById("signup").style.display="block";     
+	 // document.getElementById("logo").style.display="block";
 	}
-} )
+}) */
+
+
+
+
+
+
+
+
+
+
+
+
