@@ -5,7 +5,6 @@
     padding: 30px;
     padding-bottom: 350px;
     padding-top: 10px;
-    margin: 8% auto 0 ;
     text-align: center;
     height: 180px;
     border-radius: 10px;
@@ -17,6 +16,12 @@ body{
     background-image: url("https://www.thepencompany.com/blog/wp-content/uploads/bigstock-White-Fountain-Pen-Writing-A-L-295002112-2-1.jpg");
     background-size: cover;
     background-position: center;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 .login-box{
     border-radius: 20px;
@@ -25,6 +30,7 @@ body{
     width: 100%;
     border: 1px solid #999 ;
     outline: none;
+    
 }
 button{
     width: 100%;
@@ -35,6 +41,7 @@ button{
     border: none;
     outline: none;
     cursor: pointer ;
+    
 }
 .Button1{
 
@@ -61,8 +68,10 @@ button{
   margin-top: -70px;
 }
 #logo{
-    margin-top: -500px;
-    margin-left: 20px;
+    position: absolute;
+    top: 30%;
+    left: 5%;
+    
 }
 #or{
     margin-top: -20px;
@@ -81,8 +90,6 @@ button{
     text-align: center;
     height: 184px;
     border-radius: 10px;
-   
-   
 }
 #loginicon{
     width: 100px;

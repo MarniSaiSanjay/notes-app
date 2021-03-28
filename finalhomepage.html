@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title> HomePage</title>
+  <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-analytics.js"></script>
+  <script src="Notesapp.js" defer></script>
+</head>
+
+<body>
+  <div id="xyz">
+    <button onclick="titlechange()" id="titlechange">Change title</button>
+    <button onclick="deleteit()" id="deleteit">Delete a Note</button>
+    <button onclick="deleteall()" id="deletebtn"> &#x1f5d1; Delete All</button>
+    <button onclick="SignOut()" id="Button3"> SignOut</button>
+  </div>
+
+  <div id="menu">
+    <input id="title" placeholder="Title">
+    <textarea id="notes" class="notesarea" placeholder="Add your notes here.."
+      style="color: rgb(31, 29, 29);"></textarea>
+    <button id="usernewnotes" onclick="SAVE1()"> &#9547; &nbsp; Add a note </button>
+    <p id="empty"> </p>
+  </div>
+  <div id="base1" class="placeofdisplay">
+    <!--NOTES WILL BE DISPLAYED HERE-->
+  </div>
+
+  <style>
+    body {
+      background-color: rgb(240, 240, 240);
+    }
+
+    #menu {
+      width: 450px;
+      text-align: center;
+      margin-top: 10%;
+      margin-left: 33%;
+
+    }
+
+    #notes {
+      height: 150px;
+      width: 100%;
+      border-radius: 5px;
+      background-color: rgb(251, 253, 253);
+      font-size: 25px;
+      text-align: center;
+      font-family: fantasy;
+      color: #000;
+    }
+
+    #title {
+      width: 100%;
+      height: 10mm;
+      border-radius: 5px;
+      font-family: fantasy;
+      font-size: 25px;
+      text-align: center;
+      box-shadow: rgb(197, 201, 201);
+    }
+
+    #usernewnotes {
+      background-color: green;
+      width: 80%;
+      padding: 10px;
+      border-radius: 20px;
+      font-size: 20px;
+      margin: 10px 0;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      color: aliceblue;
+    }
+
+    ::placeholder {
+      /* Chrome, Firefox, Opera, Safari */
+      color: rgb(158, 157, 157);
+      opacity: 1;
+      /* Firefox */
+    }
+
+    :-ms-input-placeholder {
+      /* Internet Explorer */
+      color: rgb(158, 157, 157);
+    }
+
+    ::-ms-input-placeholder {
+      /* Microsoft  */
+      color: rgb(158, 157, 157);
+    }
+
+    #xyz {
+      display: block;
+    }
+
+    #Button3,
+    #deletebtn,
+    #titlechange,
+    #deleteit {
+
+      width: 200px;
+      background-color: rgb(129, 129, 129);
+      font-size: 16px;
+      font-weight: 500;
+      border-radius: 10px;
+      padding: 10px;
+      /*height of button */
+      border: none;
+      /* Without this i.e. none we see a border may be half with a color around button.*/
+      outline: none;
+      display: inline;
+      color: rgb(255, 255, 255);
+      margin-top: 10px;
+    }
+
+    #Button3 {
+      position: absolute;
+      right: 2.5%;
+    }
+
+    .placeofdisplay {
+      height: auto;
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+    }
+
+    .box {
+      padding: 10px 10px;
+      overflow: hidden;
+      width: 75%;
+      margin-bottom: 50px;
+      height: auto;
+      position: relative;
+      border-radius: 10px;
+      border: 2px solid black;
+
+    }
+
+    .titleinbox {
+      position: relative;
+      font-size: 300%;
+      font-weight: bolder;
+      letter-spacing: 5px;
+      font-family: fantasy;
+      padding: 30px;
+      border-radius: 20px;
+    }
+
+    .open {
+      position: relative;
+      font-size: 200%;
+      font-weight: bolder;
+      font-family: Comic Sans MS, Comic Sans, cursive;
+      padding-left: 20px;
+      border-radius: 20px;
+      background-color: transparent;
+      border: none;
+      outline: 0;
+      color: rgb(126, 131, 139);
+      cursor: pointer;
+    }
+
+    .closeclose {
+      background: transparent;
+      border: none;
+      position: absolute;
+      right: 0%;
+      bottom: 0.%;
+      cursor: pointer;
+    }
+
+    .savesave,
+    .copycopy {
+      font-family: Comic Sans MS, Comic Sans, cursive;
+      font-size: 20px;
+      background-color: #d9d9d9;
+      border-radius: 10px;
+      border: 2px solid rgb(203, 204, 204);
+      cursor: pointer;
+
+    }
+
+    .inputtext {
+      min-height: 300px;
+      resize: vertical;
+      width: 98%;
+      text-align: center;
+      font-family: 'Roboto', sans-serif;
+      font-size: 210%;
+      padding: 30px 10px;
+      word-wrap: break-word;
+      display: none;
+      border-radius: 5px;
+    }
+
+    .opt {
+      position: relative;
+      display: none;
+    }
+  </style>
+
+  <script>
+    if (localStorage.getItem("numberofnotes")) { } // we use the name numberof as number of notes of user.
+    else {
+      var initial = 0;
+      localStorage.setItem("numberofnotes", initial);
+      localStorage.setItem("listoftitles", '[]');//name given to colletion of titles i.e. list of titles-> titles ; '[]' -> empty array.
+      localStorage.setItem("listofcontent", '[]');
+    }
+
+    function SAVE1() {
+      var savenotes = document.getElementById("notes");
+      var savetitle = document.getElementById("title");
+      if (savenotes.value != "" && savetitle.value != "") {
+        var n = parseInt(localStorage.getItem("numberofnotes"));
+        localStorage.setItem("numberofnotes", n + 1);// incrementing numberof by one.
+        var oldlist = JSON.parse(localStorage.getItem("listoftitles"));
+        oldlist.push(savetitle.value);
+        localStorage.setItem("listoftitles", JSON.stringify(oldlist));
+        var contentlist = JSON.parse(localStorage.getItem("listofcontent"));
+        contentlist.push(savenotes.value);
+        localStorage.setItem("listofcontent", JSON.stringify(contentlist));
+        alert("Notes Saved");
+        location.reload();
+      }
+      else {
+        alert(" Please enter both the fields.");
+      }
+    }
+
+    function deleteall() {
+      localStorage.clear();
+      location.reload();
+      alert("All Notes are deleted.")
+    }
+
+    function titlechange() {
+      var p = prompt("Enter serial number of the note.");
+      if (p % 1 == 0) {
+        var list = JSON.parse(localStorage.getItem("listoftitles")); // list is an array
+        var pp = parseInt(p) - 1;
+        if (pp < list.length && pp >= 0) {
+          var str = prompt("Enter New Title.");
+          if (str.length > 0) {
+            list[pp] = str;
+            localStorage.setItem("listoftitles", JSON.stringify(list));
+            location.reload();
+          }
+        } else if (pp % 1 == 0) {
+          alert("No notes found please check serial number entered.");
+        }
+      }
+    }
+    function deleteit() {
+      var no = prompt("Enter serial number of the note.");
+      var lt = JSON.parse(localStorage.getItem("listoftitles"));
+      var lc = JSON.parse(localStorage.getItem("listofcontent"));
+      var n = parseInt(localStorage.getItem("numberofnotes"));
+      if (no.length > 0) {
+        var i = parseInt(no) - 1; // i -> index 
+        if (i < n && i >= 0) {
+          localStorage.setItem("numberofnotes", n - 1);
+          lt.splice(i, 1);
+          lc.splice(i, 1);
+          localStorage.setItem("listoftitles", JSON.stringify(lt));
+          localStorage.setItem("listofcontent", JSON.stringify(lc));
+          location.reload();
+        }
+        else {
+          alert("No notes found please check serial number entered.");
+        }
+      }
+    }
+
+    function print() {
+      var nn = parseInt(localStorage.getItem("numberofnotes"));
+      for (var i = 0; i < nn; i++) {
+        var base = document.getElementById("base1");
+        var el1 = document.createElement("div");// box
+        var el2 = document.createElement("div");// title
+        var el3 = document.createElement("button");// Open button
+        el1.setAttribute("class", "box");
+        el2.setAttribute("class", "titleinbox");
+        el3.setAttribute("class", "open");
+        el3.innerHTML = "Edit"; // Open and can edit too later open is used as class name and all 
+        el3.setAttribute("id", i); // i used in for loop 
+        base.appendChild(el1);
+        var lt = JSON.parse(localStorage.getItem("listoftitles"));
+        var lc = JSON.parse(localStorage.getItem("listofcontent"));
+        el2.innerHTML = (i + 1) + "." + lt[i];
+        el1.appendChild(el2);
+        el1.appendChild(el3);
+
+
+        var el4 = document.createElement("div");
+        el4.setAttribute("class", "opt");
+        el4.setAttribute("id", "options" + i);
+        var el5 = document.createElement("button");
+        var el6 = document.createElement("button");
+        var el7 = document.createElement("button");
+        el5.innerHTML = " &#10062; "; // Close";
+        el5.style = 'font-size:25px;'
+        el6.innerHTML = "&#10004; Save";
+        el6.style = 'font-size:20px;'
+        el7.innerHTML = "&#8450; Copy";
+        el5.setAttribute("class", "closeclose");
+        el6.setAttribute("class", "savesave");
+        el7.setAttribute("class", "copycopy");
+        el4.appendChild(el5);
+        el4.appendChild(el6);
+        el4.appendChild(el7);
+        el5.setAttribute("id", i);
+        el6.setAttribute("id", i);
+        el7.setAttribute("id", i);
+        el1.appendChild(el4);
+        var el8 = document.createElement("textarea");
+        el8.setAttribute("class", "inputtext");
+        el8.setAttribute("id", "in" + i);
+        el8.innerHTML = lc[i];
+        el1.appendChild(el8);
+      }
+    }
+    print();
+    // we are giving click functionality to EVERY open button.
+    var btns = document.getElementsByClassName("open");
+    for (var k = 0; k < btns.length; k++) {
+      var p = btns.item(k);// .item(i) is ith item of nodelist.
+      p.addEventListener("click", openbook, false);
+    }
+    function openbook(e) {
+      var select = parseInt(e.target.id);//  e.target.id; id of that open button we click. we gave id to open button as i 
+      var ab = document.getElementById("options" + select); // options is el4 and el5,6,7 are in el4 so we only call el4.
+      ab.style.display = "block";
+      var ab2 = document.getElementById("in" + select);//but el8 isn't in el4 (it is directly in el1) so we call this separately.
+      ab2.style.display = "flex";
+    }
+    // we are giving click functionality to EVERY close button.
+    // below is similar to 
+    // btnsclose.item(1).addEventListener("click",closebook,false); 
+    // btnsclose.item(2).addEventListener("click",closebook,false); and so on...for all 
+    // but we don't know how many notes a user make so  we make a var and use its length and then run the loop to 
+    // set the addEventListener to all buttons.
+    var btnsclose = document.getElementsByClassName("closeclose");
+    for (var k = 0; k < btnsclose.length; k++) {
+      var p = btnsclose.item(k);
+      p.addEventListener("click", closebook, false);
+    }
+    function closebook(e) {
+      var select = parseInt(e.target.id);
+      var ab = document.getElementById("options" + select);
+      ab.style.display = "none";
+      var ab2 = document.getElementById("in" + select);
+      ab2.style.display = "none";
+    }
+
+    var btnsave = document.getElementsByClassName("savesave");
+    for (var k = 0; k < btnsave.length; k++) {
+      var p = btnsave.item(k);
+      p.addEventListener("click", save, false);
+    }
+    function save(e) {
+      var select = parseInt(e.target.id);
+      var ab = document.getElementById("in" + select);
+      var oldlist1 = JSON.parse(localStorage.getItem("listofcontent"));
+      var fn = ab.value;
+      oldlist1[select] = fn;
+      localStorage.setItem("listofcontent", JSON.stringify(oldlist1));
+    }
+
+    var btncopy = document.getElementsByClassName("copycopy");
+    for (var k = 0; k < btncopy.length; k++) {
+      var p = btncopy.item(k);
+      p.addEventListener("click", copynotes, false);
+    }
+    function copynotes(e) {
+      var select = parseInt(e.target.id);
+      var ab = document.getElementById("in" + select);
+      ab.select();
+      document.execCommand("copy");
+    }</script>
+</body>
+
+</html>
