@@ -23,9 +23,7 @@ firebase.initializeApp(firebaseConfig);
 	promise.then(user => {
 		console.log(user);
 		alert("Signed Up");
-		window.location.href="homepage.html";
-	// document.getElementById("signup").style.display="none";
-	// document.getElementById("logo").style.display="none";
+		window.location.href="finalhomepage.html";
 	})}
  
  function signIn(){
@@ -35,41 +33,15 @@ const promise = auth.signInWithEmailAndPassword(Email.value,pass.value);
 promise.catch(e => alert(e.message));
 promise.then( user => {
 	console.log("Signed In as " + Email.value);
-	window.location.href="homepage.html"
+	window.location.href="finalhomepage.html"
 })
 }
 function SignOut() {	
-	auth.signOut();
-	promise.then(() => {
-		alert("Thankyou...");
-		window.location.href="noteslogin.html";
-	})
-
+ auth.signOut().then(() => {
+	 alert("Thankyou...");
+	 window.location.href="noteslogin.html";
+ })
 }
-/*function SignOut(){
-	
-	// const promise =
-	auth.signOut();
-	alert("Thank you..");
-	// promise.then(() => {
-		
-		window.location.href="noteslogin.html";
-	// })
-	// .catch(e => alert(e.message));
-} */
-// bye.then( user =>{
-	// alert("Thank you..");
-  //  document.getElementById("signup").style.display="block";     
-  //  document.getElementById("logo").style.display="block";
- // window.location.href="noteslogin.html";
-// })	
-//}
-
-// function signOut(){
-//	auth.signOut();
-//	alert("Thank you..");
-// }
-
  function reset() {
 	var emailAddress=document.getElementById("passreset");
 	if(emailAddress !=""){
@@ -80,24 +52,6 @@ function SignOut() {
 		resetreq.catch(e => alert(e.message));
 	}
  }
-
-/* auth.onAuthStateChanged(function(user) {
-if(user){
-	//  If user is logged in .
-	document.getElementById("userdiv").style.display = "block";
-	document.getElementById("login_div").style.display = "none";
-	 document.getElementById("animi").style.display="none";
-	// document.getElementById("signup").style.display="none";
-	// document.getElementById("logo").style.display="none";
-	}     
-	 else{
-		document.getElementById("userdiv").style.display = "none";
-	document.getElementById("login_div").style.display = "block";
-	document.getElementById("animi").style.display="block";
-	// document.getElementById("signup").style.display="block";     
-	 // document.getElementById("logo").style.display="block";
-	}
-}) */
 
 
 
