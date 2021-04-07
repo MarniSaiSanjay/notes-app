@@ -3,10 +3,10 @@
     box-shadow: 0 0 3px 0  ;
     background-color:white;
     padding: 30px;
-    padding-bottom: 350px;
+    padding-bottom: 300px;
     padding-top: 10px;
     text-align: center;
-    height: 180px;
+    height: 170px;
     border-radius: 10px;
 }
 body{
@@ -107,8 +107,7 @@ button{
       -webkit-animation-iteration-count:infinite;
       animation-direction: alternate;
      text-align: left;
-     margin-top: 230px;
-    
+    margin-top: 230px; 
   }
   @keyframes type{
       0% {
