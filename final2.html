@@ -7,262 +7,79 @@
   <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-analytics.js"></script>
-  
+
   <script src="notesapp.js" defer></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+    integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./final2.css">
 </head>
 
 <body>
-  <div id="xyz">
-    <button onclick="titlechange()" id="titlechange">Change title</button>
-    <button onclick="deleteit()" id="deleteit">Delete a Note</button>
-    <button onclick="deleteall()" id="deletebtn"> &#x1f5d1; Delete All</button>
-    <button onclick="SignOut()" id="Button3"> SignOut</button>
-  </div>
+  <nav>
+    <div class="left-btns">
+      <button onclick="titlechange()" id="titlechange">Change title</button>
+      <button onclick="deleteit()" id="deleteit">Delete a Note</button>
+      <button onclick="deleteall()" id="deletebtn"><i class="fas fa-trash"></i> Delete All</button>
+    </div>
+    <button onclick="SignOut()" id="Button3"> Sign out <i class="fas fa-sign-out-alt"></i></button>
+  </nav>
 
   <div id="menu">
     <input id="title" placeholder="Title">
     <textarea id="notes" class="notesarea" placeholder="Add your notes here.."
       style="color: rgb(31, 29, 29);"></textarea>
-    <button id="usernewnotes" onclick="SAVE1()"> &#9547; &nbsp; Add a note </button>
-    <p id="empty"> Your Notes </p>
+      <div class="addnote">
+    <button id="usernewnotes" onclick="SAVE1()"><i class="fas fa-plus"></i>  Add a note </button>
+      </div>
+    <p id="empty"> Saved Notes </p>
     <hr>
     <p id="yournotes"> No Notes Saved</p>
   </div>
- 
+
   <div id="base1" class="placeofdisplay">
     <!--NOTES WILL BE DISPLAYED HERE-->
   </div>
 
-  <style>
-    body {
-      background-color: rgb(240, 240, 240);
-    }
-
-    #menu {
-      width: 450px;
-      text-align: center;
-      margin-top: 10%;
-      margin-left: 33%;
-
-    }
-
-    #notes {
-      height: 150px;
-      width: 100%;
-      border-radius: 5px;
-      background-color: rgb(251, 253, 253);
-      font-size: 25px;
-      text-align: center;
-      font-family: papyrus;
-
-     
-      border: 1.5px solid #8c8c8c;}
-
-    #title {
-      width: 100%;
-      height: 12mm;
-      border-radius: 5px;
-      font-family: papyrus;
-      font-size: 25px;
-      text-align: center;
-      border: 1.5px solid #8c8c8c;
-      margin-bottom: 5px;
-      }
-      #empty{
-        font-size: 20px;
-        font-weight: bolder;
-        text-align: center;
-        justify-content: center;
-      }
-
-
-    #usernewnotes {
-      background-color: green;
-      width: 80%;
-      padding: 10px;
-      border-radius: 20px;
-      font-size: 20px;
-      margin: 10px 0;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      color: aliceblue;
-    }
-    #yournotes{
-     font-family:  papyrus;
-     font-size: 40px;
-    }
-
-    ::placeholder {
-      /* Chrome, Firefox, Opera, Safari */
-      
-      color: rgb(158, 157, 157);
-      opacity: 1;
-      /* Firefox */
-    }
-
-    :-ms-input-placeholder {
-      /* Internet Explorer */
-      color: rgb(158, 157, 157);
-    }
-
-    ::-ms-input-placeholder {
-      /* Microsoft  */
-      color: rgb(158, 157, 157);
-    }
-
-    #xyz {
-      display: block;
-    }
-
-    #Button3,
-    #deletebtn,
-    #titlechange,
-    #deleteit {
-
-      width: 200px;
-      background-color: rgb(129, 129, 129);
-      font-size: 16px;
-      font-weight: 500;
-      border-radius: 10px;
-      padding: 10px;
-      /*height of button */
-      border: none;
-      /* Without this i.e. none we see a border may be half with a color around button.*/
-      outline: none;
-      display: inline;
-      color: rgb(255, 255, 255);
-      margin-top: 10px;
-    }
-
-    #Button3 {
-      position: absolute;
-      right: 2.5%;
-    }
-
-    .placeofdisplay {
-      height: auto;
-      position: relative;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-
-    }
-
-    .box {
-      padding: 10px 10px;
-      overflow: hidden;
-      width: 75%;
-      margin-bottom: 50px;
-      height: auto;
-      position: relative;
-      border-radius: 10px;
-      border: 1px solid #999999;
-  
-    }
-
-    .titleinbox {
-      position: relative;
-      font-size: 300%;
-      font-weight: bolder;
-      letter-spacing: 1px;
-      font-family: papyrus;
-      padding: 30px;
-      border-radius: 20px;
-    }
-
-    .open {
-      position: relative;
-      font-size: 200%;
-      font-weight: bolder;
-      font-family: Comic Sans MS, Comic Sans, cursive;
-      padding-left: 20px;
-      border-radius: 20px;
-      background-color: transparent;
-      border: none;
-      outline: 0;
-      color: rgb(126, 131, 139);
-      cursor: pointer;
-    }
-
-    .closeclose {
-      background: transparent;
-      border: none;
-      position: absolute;
-      right: 0%;
-      bottom: 0.%;
-      cursor: pointer;
-    }
-
-    .savesave,
-    .copycopy {
-      font-family: Comic Sans MS, Comic Sans, cursive;
-      font-size: 20px;
-      background-color: #d9d9d9;
-      border-radius: 10px;
-      border: .1px solid  #8c8c8c;
-      cursor: pointer;
-
-    }
-
-    .inputtext {
-      min-height: 300px;
-      resize: vertical;
-      width: 98%;
-      text-align: center;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 210%;
-      padding: 30px 10px;
-      word-wrap: break-word;
-      display: none;
-      border-radius: 5px;
-    }
-
-    .opt {
-      position: relative;
-      display: none;
-    }
-    
-  </style>
-
   <script>
 
-  
-var namepresent = localStorage.getItem("current");
+
+    var namepresent = localStorage.getItem("current");
 
 
 
 
 
-    if (localStorage.getItem("numberofnotes" + namepresent)) { 
+    if (localStorage.getItem("numberofnotes" + namepresent)) {
       // notes are saved already.
     } // we use the name numberof as number of notes of user.
     else { // no nates saved.
       var initial = 0;
       localStorage.setItem("numberofnotes" + namepresent, initial);
       localStorage.setItem("listoftitles" + namepresent, '[]');//name given to colletion of titles i.e. list of titles-> titles ; '[]' -> empty array.
-      localStorage.setItem("listofcontent" + namepresent, '[]');  
-      localStorage.setItem("dates" + namepresent,'[]');
-      localStorage.setItem("time" + namepresent,'[]');
+      localStorage.setItem("listofcontent" + namepresent, '[]');
+      localStorage.setItem("dates" + namepresent, '[]');
+      localStorage.setItem("time" + namepresent, '[]');
     }
-    var number1 =  parseInt(localStorage.getItem("numberofnotes" + namepresent));
-     if(number1 > 0){
+    var number1 = parseInt(localStorage.getItem("numberofnotes" + namepresent));
+    if (number1 > 0) {
       var your = document.getElementById("yournotes");
-      your.style.display="none";
-     }else{
+      your.style.display = "none";
+    } else {
       var your = document.getElementById("yournotes");
-      your.style.display="block"; 
-     }
+      your.style.display = "block";
+    }
 
-     let today = new Date();
-var date = today.getDate();
-var month = today.getMonth() + 1;
-var year = today.getFullYear();
-var hour = today.getHours();
-var minute = today.getMinutes();
-var second = today.getSeconds();
+    let today = new Date();
+    var date = today.getDate();
+    var month = today.getMonth() + 1;
+    var year = today.getFullYear();
+    var hour = today.getHours();
+    var minute = today.getMinutes();
+    var second = today.getSeconds();
 
     function SAVE1() {
       var savenotes = document.getElementById("notes");
@@ -278,19 +95,19 @@ var second = today.getSeconds();
         localStorage.setItem("listofcontent" + namepresent, JSON.stringify(contentlist));
 
         var listofdates = JSON.parse(localStorage.getItem("dates" + namepresent));
-       let mydate= date;
-       var mymon = month;
-       var myyear = year;
-       listofdates.push(mydate + '/' + mymon + '/' + myyear);
-       localStorage.setItem("dates" + namepresent,JSON.stringify(listofdates));
+        let mydate = date;
+        var mymon = month;
+        var myyear = year;
+        listofdates.push(mydate + '/' + mymon + '/' + myyear);
+        localStorage.setItem("dates" + namepresent, JSON.stringify(listofdates));
 
-       var listoftime = JSON.parse(localStorage.getItem("time" + namepresent));
-       var myhour = hour;
-       var mymin = minute;
-       var mysec = second;
- 
-       listoftime.push( myhour + ':' + mymin + ':' + mysec);
-       localStorage.setItem("time" + namepresent,JSON.stringify(listoftime));
+        var listoftime = JSON.parse(localStorage.getItem("time" + namepresent));
+        var myhour = hour;
+        var mymin = minute;
+        var mysec = second;
+
+        listoftime.push(myhour + ':' + mymin + ':' + mysec);
+        localStorage.setItem("time" + namepresent, JSON.stringify(listoftime));
 
         alert("Notes Saved");
         location.reload();
@@ -301,84 +118,86 @@ var second = today.getSeconds();
     }
 
     function deleteall() {
-      var number1 =  parseInt(localStorage.getItem("numberofnotes" + namepresent));
-      if(number1 > 0){
-    let confdelall = confirm("Are you sure you want to delete all notes made ?");
-    if(confdelall == true){
-   localStorage.removeItem("listoftitles" + namepresent);
-    localStorage.removeItem("numberofnotes" + namepresent);
-    localStorage.removeItem("listofcontent" + namepresent);
-    localStorage.removeItem("time" + namepresent);
-    localStorage.removeItem("dates" + namepresent); 
-      location.reload();
-      alert("All Notes are deleted.")
-    } }else{
-      alert("No notes to delete!!");
+      var number1 = parseInt(localStorage.getItem("numberofnotes" + namepresent));
+      if (number1 > 0) {
+        let confdelall = confirm("Are you sure you want to delete all notes made ?");
+        if (confdelall == true) {
+          localStorage.removeItem("listoftitles" + namepresent);
+          localStorage.removeItem("numberofnotes" + namepresent);
+          localStorage.removeItem("listofcontent" + namepresent);
+          localStorage.removeItem("time" + namepresent);
+          localStorage.removeItem("dates" + namepresent);
+          location.reload();
+          alert("All Notes are deleted.")
+        }
+      } else {
+        alert("No notes to delete!!");
+      }
     }
-   }
 
     function titlechange() {
-      var number1 =  parseInt(localStorage.getItem("numberofnotes" + namepresent));
-      if(number1 >0){
-      var p = prompt("Enter serial number of the note.");
-      if (p % 1 == 0) {
-        var list = JSON.parse(localStorage.getItem("listoftitles" + namepresent)); // list is an array
-        var pp = parseInt(p) - 1;
-        if (pp < list.length && pp >= 0) {
-          var str = prompt("Enter New Title.");
-          if (str.length > 0) {
-            list[pp] = str;
-            localStorage.setItem("listoftitles" + namepresent, JSON.stringify(list));
-            location.reload();
-          } else{
-            alert("You have not entered a new title. Try again.")
+      var number1 = parseInt(localStorage.getItem("numberofnotes" + namepresent));
+      if (number1 > 0) {
+        var p = prompt("Enter serial number of the note.");
+        if (p % 1 == 0) {
+          var list = JSON.parse(localStorage.getItem("listoftitles" + namepresent)); // list is an array
+          var pp = parseInt(p) - 1;
+          if (pp < list.length && pp >= 0) {
+            var str = prompt("Enter New Title.");
+            if (str.length > 0) {
+              list[pp] = str;
+              localStorage.setItem("listoftitles" + namepresent, JSON.stringify(list));
+              location.reload();
+            } else {
+              alert("You have not entered a new title. Try again.")
+            }
+
+          } else if (pp % 1 == 0) {
+            alert("No notes found please check serial number entered.");
+          }
+        } else {
+          alert("Please enter a valid serial number and Try again.")
+        }
+      } else {
+        alert("No notes are made.");
+      }
+    }
+    function deleteit() {
+      var number1 = parseInt(localStorage.getItem("numberofnotes" + namepresent));
+      if (number1 > 0) {
+        var no = prompt("Enter serial number of the note.");
+        var lt = JSON.parse(localStorage.getItem("listoftitles" + namepresent));
+        var lc = JSON.parse(localStorage.getItem("listofcontent" + namepresent));
+        var n = parseInt(localStorage.getItem("numberofnotes" + namepresent));
+        var ld = JSON.parse(localStorage.getItem("dates" + namepresent));
+        var ltime = JSON.parse(localStorage.getItem("time" + namepresent));
+
+        if (no.length > 0) {
+          var confdel = confirm("Are you sure you want to delete the note?");
+          if (confdel == true) {
+            var i = parseInt(no) - 1; // i -> index 
+            if (i < n && i >= 0) {
+              localStorage.setItem("numberofnotes" + namepresent, n - 1);
+              lt.splice(i, 1);
+              lc.splice(i, 1);
+              ld.splice(i, 1);
+              ltime.splice(i, 1);
+              localStorage.setItem("listoftitles" + namepresent, JSON.stringify(lt));
+              localStorage.setItem("listofcontent" + namepresent, JSON.stringify(lc));
+              localStorage.setItem("time" + namepresent, JSON.stringify(ltime));
+              localStorage.setItem("dates" + namepresent, JSON.stringify(ld));
+              location.reload();
+            }
+            else {
+              alert("No notes found please check serial number entered.");
+            }
           }
 
-        } else if (pp % 1 == 0) {
-          alert("No notes found please check serial number entered.");
         }
-      } else{
-        alert("Please enter a valid serial number and Try again.")
+      } else {
+        alert("No notes to delete!!");
       }
-    }else{
-      alert("No notes are made.");
-    } 
-  }
-    function deleteit() {
-      var number1 =  parseInt(localStorage.getItem("numberofnotes" + namepresent));
-      if(number1 > 0) {
-      var no = prompt("Enter serial number of the note.");
-      var lt = JSON.parse(localStorage.getItem("listoftitles" + namepresent));
-      var lc = JSON.parse(localStorage.getItem("listofcontent" + namepresent));
-      var n = parseInt(localStorage.getItem("numberofnotes" + namepresent));
-      var ld = JSON.parse(localStorage.getItem("dates" + namepresent));
-      var ltime = JSON.parse(localStorage.getItem("time" + namepresent));
-
-      if (no.length > 0) {
-        var confdel = confirm("Are you sure you want to delete the note?");
-        if(confdel == true){
-        var i = parseInt(no) - 1; // i -> index 
-        if (i < n && i >= 0) {
-          localStorage.setItem("numberofnotes" + namepresent, n - 1);
-          lt.splice(i, 1);
-          lc.splice(i, 1);
-          ld.splice(i,1);
-          ltime.splice(i,1);
-          localStorage.setItem("listoftitles" + namepresent, JSON.stringify(lt));
-          localStorage.setItem("listofcontent" + namepresent, JSON.stringify(lc));
-          localStorage.setItem("time" + namepresent,JSON.stringify(ltime));
-          localStorage.setItem("dates" + namepresent,JSON.stringify(ld));
-          location.reload();}
-          else {
-          alert("No notes found please check serial number entered.");
-        }
-        }
-       
-      }
-    } else{
-      alert("No notes to delete!!");
-    } 
-  }
+    }
 
     function print() {
       var nn = parseInt(localStorage.getItem("numberofnotes" + namepresent));
@@ -401,22 +220,22 @@ var second = today.getSeconds();
         el1.appendChild(el3);
 
 
-        var  el9 = document.createElement("div");
-     el9.setAttribute("class",date);
-     var thendate = JSON.parse(localStorage.getItem("dates" + namepresent));
-     el9.innerHTML = "Last Modified: " + thendate[i];
-     el1.appendChild(el9);
-     el9.style.textAlign='right';
-     el9.style.fontFamily='papyrus'
-   
-     var el10 = document.createElement("div");
-     el10.setAttribute("class", date); 
-     var thentime = JSON.parse(localStorage.getItem("time" + namepresent));
-     el10.innerHTML = thentime[i];
-     el1.appendChild(el10);
-     el10.style.textAlign='right';
-     el10.style.fontFamily='papyrus'
-     
+        var el9 = document.createElement("div");
+        el9.setAttribute("class", date);
+        var thendate = JSON.parse(localStorage.getItem("dates" + namepresent));
+        el9.innerHTML = "Last Modified: " + thendate[i];
+        el1.appendChild(el9);
+        el9.style.textAlign = 'right';
+        el9.style.fontFamily = 'papyrus'
+
+        var el10 = document.createElement("div");
+        el10.setAttribute("class", date);
+        var thentime = JSON.parse(localStorage.getItem("time" + namepresent));
+        el10.innerHTML = thentime[i];
+        el1.appendChild(el10);
+        el10.style.textAlign = 'right';
+        el10.style.fontFamily = 'papyrus'
+
 
         var el4 = document.createElement("div");
         el4.setAttribute("class", "opt");
@@ -491,20 +310,20 @@ var second = today.getSeconds();
       var fn = ab.value;
       oldlist1[select] = fn;
       localStorage.setItem("listofcontent" + namepresent, JSON.stringify(oldlist1));
-     
+
       var ld = JSON.parse(localStorage.getItem("dates" + namepresent));
       var lt = JSON.parse(localStorage.getItem("time" + namepresent));
-      let mydate= date;
-       var mymon = month;
-       var myyear = year;
-      ld.splice(select,1,mydate + '/' + mymon + '/' + myyear);
-      localStorage.setItem("dates" + namepresent,JSON.stringify(ld));
+      let mydate = date;
+      var mymon = month;
+      var myyear = year;
+      ld.splice(select, 1, mydate + '/' + mymon + '/' + myyear);
+      localStorage.setItem("dates" + namepresent, JSON.stringify(ld));
 
       var myhour = hour;
-       var mymin = minute;
-       var mysec = second;
-      lt.splice(select,1,myhour + ':' + mymin + ':' + mysec);
-      localStorage.setItem("time" + namepresent,JSON.stringify(lt));
+      var mymin = minute;
+      var mysec = second;
+      lt.splice(select, 1, myhour + ':' + mymin + ':' + mysec);
+      localStorage.setItem("time" + namepresent, JSON.stringify(lt));
       location.reload();
     }
 
@@ -520,8 +339,8 @@ var second = today.getSeconds();
       document.execCommand("copy");
     }
 
-    
-    </script>
+
+  </script>
 </body>
 
 </html>
