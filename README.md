@@ -27,5 +27,5 @@
 You can check it on https://marnisaisanjay.github.io/notes-app/ 
 
 All suggestions are most welcome!
-Happy reading....
+Thank you and Happy reading.....
 
