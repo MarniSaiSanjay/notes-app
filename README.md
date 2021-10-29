@@ -26,6 +26,4 @@
 
 You can check it on https://marnisaisanjay.github.io/notes-app/ 
 
-All suggestions are most welcome!
-Thank you and Happy reading.....
-
+All suggestions are most welcome.
